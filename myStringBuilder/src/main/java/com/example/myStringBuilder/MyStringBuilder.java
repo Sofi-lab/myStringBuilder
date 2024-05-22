@@ -11,8 +11,8 @@ public class MyStringBuilder {
     private StringBuilder builder;
 
     public MyStringBuilder() {
-        this.builder = new StringBuilder();
         this.stack = new Stack<>();
+        this.builder = new StringBuilder();
     }
 
     public MyStringBuilder append(String str) {
@@ -28,10 +28,9 @@ public class MyStringBuilder {
     public void undo() {
         if (stack.size() > 1) {
             stack.pop();
-            String previousPos = stack.peek();
-            builder = new StringBuilder(previousPos);
+            builder = new StringBuilder(stack.peek());
         } else {
-            throw new RuntimeException("This is start state");
+            builder = new StringBuilder();
         }
     }
 
@@ -42,12 +41,14 @@ public class MyStringBuilder {
 
     public static void main(String[] args) {
         MyStringBuilder build = new MyStringBuilder();
-        build.append(" firstAdd,");
-        build.append(" secondAdd,");
+        build.append(" Первая строка");
+        build.undo();
+        System.out.println(build);
+        build.append(" Вторая строка, ");
+        build.append(" Третья строка,");
+        System.out.println(build);
 
         build.undo();
-        build.append(" third append");
-
         System.out.println(build);
     }
 }
