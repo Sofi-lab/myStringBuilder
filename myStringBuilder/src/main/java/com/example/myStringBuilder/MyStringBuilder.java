@@ -16,7 +16,7 @@ public class MyStringBuilder {
     }
 
     public MyStringBuilder append(String str) {
-        saveStack(str);
+        saveStack(this.builder.toString());
         builder.append(str);
         return this;
     }
@@ -27,8 +27,7 @@ public class MyStringBuilder {
 
     public void undo() {
         if (stack.size() > 1) {
-            stack.pop();
-            builder = new StringBuilder(stack.peek());
+            builder = new StringBuilder(stack.pop());
         } else {
             builder = new StringBuilder();
         }
@@ -40,15 +39,12 @@ public class MyStringBuilder {
     }
 
     public static void main(String[] args) {
-        MyStringBuilder build = new MyStringBuilder();
-        build.append(" Первая строка");
-        build.undo();
-        System.out.println(build);
-        build.append(" Вторая строка, ");
-        build.append(" Третья строка,");
-        System.out.println(build);
-
-        build.undo();
-        System.out.println(build);
+        MyStringBuilder a = new MyStringBuilder();
+        a.append("test,");
+        a.append("test,");
+        a.append("test,");
+        a.append("test,");
+        a.undo();
+        System.out.println(a);
     }
 }
